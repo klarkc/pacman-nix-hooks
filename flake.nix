@@ -2,9 +2,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, flake-compat }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -16,6 +20,8 @@
 
         packageName = "pacman-nix-hooks";
       in {
+        inherit (inputs) flake-compat;
+
         packages.${packageName} =
           haskellPackages.callCabal2nix packageName self rec {
             # Dependency overrides go here
