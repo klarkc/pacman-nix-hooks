@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Upgrading nix packages
+When = PostTransaction
+Exec = /etc/pacman.d/hooks.bin/upgrade-nix

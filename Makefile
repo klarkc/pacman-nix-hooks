@@ -1,25 +1,32 @@
 DEST := result
 DEST_BIN := $(DEST)/bin
-INSTALL_BIN := /etc/pacman.d/hooks.bin
+HOOKS := hooks
+INSTALL := /etc/pacman.d
+INSTALL_HOOKS := $(INSTALL)/hooks
+INSTALL_BIN := $(INSTALL)/hooks.bin
+BINS := $(shell basename $$(cabal list-bin .))
 
 .PHONY: build
-build:
-	nix build
+build: $(patsubst %, $(DEST_BIN)/%, $(BINS))
 
 $(DEST_BIN)/%: 
-	nix build \#.$*
+	nix build #.$*
 
 $(INSTALL_BIN)/%: $(DEST_BIN)/%
-	cp $@ $(INSTALL_BIN)
+	cp $(DEST_BIN)/$* $@ 
+
+$(INSTALL_HOOKS)/%:
+	cp $(HOOKS)/$* $@
 
 .PHONY: install
-install: $(patsubst %, $(INSTALL_BIN)/%, $(shell basename $$(cabal list-bin .)))
+install: $(patsubst %, $(INSTALL_BIN)/%, $(BINS)) $(patsubst $(HOOKS)/%, $(INSTALL_HOOKS)/%, $(wildcard $(HOOKS)/*.hook)) 
 
 .PHONY: clean
 clean:
-	rm -rf $(DEST)
-	rm -rf dist-newstyle
+	rm -r $(DEST)
+	rm -r dist-newstyle
 
 .PHONY: uninstall
 uninstall: install
 	find $(DEST_BIN) -type f -exec sh -c 'rm "$(INSTALL_BIN)/$$(basename {})"' \;
+	find $(HOOKS) -type f -exec sh -c 'rm "$(INSTALL_HOOKS)/$$(basename {})"' \;

@@ -32,6 +32,8 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             haskellPackages.haskell-language-server # you must build it with your ghc to work
+            # tried to use this tool to generate PKGBUILD but it is broken
+            # TODO: enable haskellPackages.arch-hs
             ghcid
             cabal-install
           ];
