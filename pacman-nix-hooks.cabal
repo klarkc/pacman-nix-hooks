@@ -8,8 +8,26 @@ maintainer:         walker@praiseweb.com.br
 extra-source-files:
     README.md
 
+library
+   exposed-modules:  Action
+   hs-source-dirs:   src
+   build-depends:    base
+   default-language: GHC2021
+
+test-suite test-pacman-nix-hooks
+   main-is:          Main.hs
+   build-depends:    
+        base
+      , tasty
+      , tasty-hunit
+      , transformers
+      , pacman-nix-hooks
+   hs-source-dirs:   tests
+   type:             exitcode-stdio-1.0
+   default-language: GHC2021
+
 executable upgrade-nix
-    main-is:          Main.hs
-    build-depends:    base ^>=4.15.1.0
-    hs-source-dirs:   app
-    default-language: Haskell2010
+   main-is:          Main.hs
+   build-depends:    base
+   hs-source-dirs:   app
+   default-language: GHC2021
