@@ -28,6 +28,9 @@ test-suite test-pacman-nix-hooks
 
 executable upgrade-nix
    main-is:          Main.hs
-   build-depends:    base
+   build-depends:    
+        base
+      , process
+      , pacman-nix-hooks
    hs-source-dirs:   app
    default-language: GHC2021
