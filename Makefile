@@ -9,6 +9,10 @@ BINS := $(shell basename $$(cabal list-bin .))
 .PHONY: build
 build: $(patsubst %, $(DEST_BIN)/%, $(BINS))
 
+.PHONY: test
+test:
+	cabal test
+
 $(DEST_BIN)/%: 
 	nix build #.$*
 

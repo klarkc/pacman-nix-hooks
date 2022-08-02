@@ -1,4 +1,4 @@
-module Test where
+module Main where
 
 import Action
 import Control.Monad (void)
