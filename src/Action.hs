@@ -20,7 +20,7 @@ findUsers = filter byUsers <$> lines <$> readProcess ("find", args)
         "-exec",
         "basename",
         "{}",
-        "\\;"
+        ";"
       ]
 
 upgrade :: EffectMonad a => User -> a ()

@@ -23,5 +23,5 @@ main = defaultMain $
       @?= [ ("su", ["-", "foo", "-c", "\"nix-env -u\""]),
             ("su", ["-", "bar", "-c", "\"nix-env -u\""]),
             ("su", ["-", "root", "-c", "\"nix-env -u\""]),
-            ("find", ["/nix/var/nix/profiles/per-user", "-type", "d", "-exec", "basename", "{}", "\\;"])
+            ("find", ["/nix/var/nix/profiles/per-user", "-type", "d", "-exec", "basename", "{}", ";"])
           ]
