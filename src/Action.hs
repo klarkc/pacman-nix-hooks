@@ -24,7 +24,7 @@ findUsers = filter byUsers <$> lines <$> readProcess ("find", args)
       ]
 
 upgrade :: EffectMonad a => User -> a ()
-upgrade u = void $ readProcess ("su", ["-", u, "-c", "\"nix-env -u\""])
+upgrade u = void $ readProcess ("su", [u, "-s", "/usr/bin/nix-env", "--", "-u"])
 
 upgradeNix :: EffectMonad a => a ()
 upgradeNix = findUsers >>= foldM (const upgrade) ()

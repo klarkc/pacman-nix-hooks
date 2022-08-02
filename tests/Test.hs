@@ -20,8 +20,8 @@ instance EffectMonad (State [Command]) where
 main = defaultMain $
   testCase "should run `nix-env -u` for each nix user" $ do
     execState upgradeNix mempty
-      @?= [ ("su", ["-", "foo", "-c", "\"nix-env -u\""]),
-            ("su", ["-", "bar", "-c", "\"nix-env -u\""]),
-            ("su", ["-", "root", "-c", "\"nix-env -u\""]),
+      @?= [ ("su", ["foo", "-s", "/usr/bin/nix-env", "--", "-u"]),
+            ("su", ["bar", "-s", "/usr/bin/nix-env", "--", "-u"]),
+            ("su", ["root", "-s", "/usr/bin/nix-env", "--", "-u"]),
             ("find", ["/nix/var/nix/profiles/per-user", "-type", "d", "-exec", "basename", "{}", ";"])
           ]
