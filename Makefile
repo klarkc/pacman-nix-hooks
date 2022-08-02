@@ -27,8 +27,9 @@ install: $(patsubst %, $(INSTALL_BIN)/%, $(BINS)) $(patsubst $(HOOKS)/%, $(INSTA
 
 .PHONY: clean
 clean:
-	rm -r $(DEST)
-	rm -r dist-newstyle
+	-cabal clean
+	-rm -r $(DEST)
+	-rm -r dist-newstyle
 
 .PHONY: uninstall
 uninstall: install
