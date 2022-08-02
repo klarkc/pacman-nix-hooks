@@ -21,7 +21,8 @@
             # Dependency overrides go here
           };
 
-        defaultPackage = self.packages.${system}.${packageName};
+        # We don't need to build anything to nix, so skipping that
+        # defaultPackage = self.packages.${system}.${packageName};
 
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [

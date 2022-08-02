@@ -4,10 +4,9 @@ A collection of pacman hooks to integrate recurring nix operations.
 
 # Install from source
 
-> Nix is required
+> Cabal + GHC is required, but there is a ready nix environment
 
 ```bash
-nix develop
 make
 sudo make install
 ```
