@@ -14,7 +14,7 @@ mkReadProcess c r = do
   return r
 
 instance EffectMonad (State [Command]) where
-  readProcess ("find", a) = mkReadProcess ("find", a) "bar\nfoo"
+  readProcess ("find", a) = mkReadProcess ("find", a) "per-user\nroot\nbar\nfoo"
   readProcess c = mkReadProcess c mempty
 
 main = defaultMain $
@@ -22,5 +22,6 @@ main = defaultMain $
     execState upgradeNix mempty
       @?= [ ("su", ["-", "foo", "-c", "\"nix-env -u\""]),
             ("su", ["-", "bar", "-c", "\"nix-env -u\""]),
+            ("su", ["-", "root", "-c", "\"nix-env -u\""]),
             ("find", ["/nix/var/nix/profiles/per-user", "-type", "d", "-exec", "basename", "{}", "\\;"])
           ]
