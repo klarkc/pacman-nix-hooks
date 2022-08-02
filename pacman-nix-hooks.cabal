@@ -15,7 +15,7 @@ library
    default-language: GHC2021
 
 test-suite test-pacman-nix-hooks
-   main-is:          Main.hs
+   main-is:          Test.hs
    build-depends:    
         base
       , tasty
