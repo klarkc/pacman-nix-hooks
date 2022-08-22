@@ -1,6 +1,6 @@
 # Pacman Nix Hooks
 
-A collection of pacman hooks to integrate recurring nix operations.
+A collection of [pacman](https://wiki.archlinux.org/title/pacman) hooks to integrate recurring [nix](https://nixos.org) operations.
 
 # Install from source
 
